@@ -1,25 +1,7 @@
-﻿/*MIS 411 – Code Snippet 10
-Classes and Objects (5 pts)
+﻿// Jackson Hickman
+// Snippet 10, classes and to string usage. zoo
+// MIS 411
 
-Skills Assessed
-This assignment will focus on practicing the following programming concepts:
-
-Create a CLASS data element based on the animal
-Create a “constructor” for the CLASS and create objects in the code
-Add the objects to a List or Array
-Override the ToString() method
-Cycle through the List/Array to print the data elements
-Instructions
-Copy the text below into a new program in Visual Studio.
-This code should replace the code automatically generated, beginning with the Namespace command.  Note that you MAY keep your default Namespace, Program, and Main lines if desired, just be sure to remove the corresponding lines from the copied text.
-Be sure to add a comment block at the top of the program providing your name and a brief description of the program.
-Using the template provided, fill in the required code that will:
-Create a CLASS element built around an animal
-Give the CLASS variables, a default constructor (no arguments), a second constructor (all fields as arguments), and a new ToString() method that will display all the fields of the animal object in a readable format
-Create a “zoo” List or Array made of the ANIMAL objects
-Output all the animals in the “zoo” to the Console using the ToString() method.
-Program Skeleton
-Use the code below as an outline for your completed assignment.  Your task is to fill in the missing components (indicated by commented text) to create a working program that provides the demonstrated functionality and outputs described above. */
 
 namespace hickmansnippet10
 
@@ -43,11 +25,19 @@ namespace hickmansnippet10
 
     }
 
-    public enum Habitat
+    public enum Habitat //wanted to use an enum for habitat because i thought it would work better.
     {
+    
+        forest,
+
+        grassland,
+
+        wetland,
+
         savannah,
-        
-    }
+
+        other = 100
+        } // allows for the addition of more habitat types without renumbering
 
     public enum Type  // ENUM list of categories of animals - feel free to add as necessary
 
@@ -72,25 +62,12 @@ namespace hickmansnippet10
     public class Animal
     {
         public Coat animalcoat;
-        public Type animaltype;
+        public Type animaltype; //using the type enum defined above for animaltype variable, same thing is done for coat and habitat variables
         public string animalName;
         public int numFeet;
         public Habitat habitat;
     
-    };
-    // CLASS of animal, collecting all the necessary information to store for an animal entry.
-
-                   // The animal CLASS must include the two ENUM data types created above.
-
-                   // In addition, the CLASS should have a name, the number of feet, and a habitat, at a minimum.
-
-    // {
-
- 
-
- 
-
-        // Constructor1  - Default constructor taking no parameters
+        //Default constructor taking no parameters
 
         public Animal()
         {
@@ -106,7 +83,7 @@ namespace hickmansnippet10
 
        // Constructor2 – A constructor where all variables are assigned using parameters
 
-        public Animal(Coat coat, Type type, string animalName, int feet, Habitat habitat)
+        public Animal(Coat coat, Type type, string name, int feet, Habitat animalHabitat) // used the enums defined above as parameters for the constructor, in addition to the other required parameters
         {
             animalcoat = coat;
             animaltype = type;
@@ -115,33 +92,31 @@ namespace hickmansnippet10
             habitat = animalHabitat;
         }
 
- 
 
- 
-
-        // ToString() method
-
-        // Include labels for the type of data being output.  For example:  an output may include 'Name:  Lion'.
-
- 
-
- 
-
- 
-
+        // to string method allows printing for each instance of animal class, with labels for each variable. we call this below in main program to print our output.
+        public override string ToString()
+        {
+            return $"Animal: {animalName}, Type: {animaltype}, Coat: {animalcoat}, Feet: {numFeet}, Habitat: {habitat}";
+        }
     }
-
- 
-
-    internal class Program
-
+    
+    internal class Program // enums and animal class defined before main program
     {
 
         static void Main(string[] args)
 
         {
 
-            //  Create a "zoo" list or array and populate it with at least 5 animals.
+            //Zoo list, animals added to list using constructor2.
+
+            List<Animal> zoo = new List<Animal>();
+            zoo.Add(new Animal(Coat.fur, Type.mammal, "Lion", 4, Habitat.grassland));
+            zoo.Add(new Animal(Coat.feathers, Type.bird, "Eagle", 2, Habitat.savannah)); //uh just realized that eagle doesn't really live in the forest, it kinda just lives in the sky
+            zoo.Add(new Animal(Coat.scales, Type.reptile, "Crocodile", 4, Habitat.wetland));
+            zoo.Add(new Animal(Coat.exoskeleton, Type.insect, "Ant", 6, Habitat.forest));
+            zoo.Add(new  Animal(Coat.fur, Type.mammal, "Rottweiler", 4, Habitat.other)); //rottweilers live in the house usually, so I put other for the habitat
+
+
 
  
 
@@ -149,15 +124,17 @@ namespace hickmansnippet10
 
  
 
-            //  Using the new ToString() method, cycle through the list/array of animals and print all the fields of the animal in a concise, organized layout.
+            //  For each loop cycles through the zoo list and uses to string to print out the  of each animal in the list.
 
- 
-
- 
+            foreach (Animal animal in zoo)
+            {
+                Console.WriteLine(animal.ToString());
+            }
 
         }
 
     }
+}    
 
 
 
