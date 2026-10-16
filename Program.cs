@@ -71,14 +71,13 @@ namespace hickmansnippet10
 
     public class Animal
     {
-        public int[,] animalArray; // Used for zoo array down below
         public Coat animalcoat;
         public Type animaltype;
         public string animalName;
         public int numFeet;
-        public string habitat;
-        
-    }
+        public Habitat habitat;
+    
+    };
     // CLASS of animal, collecting all the necessary information to store for an animal entry.
 
                    // The animal CLASS must include the two ENUM data types created above.
@@ -93,6 +92,12 @@ namespace hickmansnippet10
 
         // Constructor1  - Default constructor taking no parameters
 
+        public Animal()
+        {
+
+
+        }
+
  
 
  
@@ -101,7 +106,14 @@ namespace hickmansnippet10
 
        // Constructor2 – A constructor where all variables are assigned using parameters
 
- 
+        public Animal(Coat coat, Type type, string animalName, int feet, Habitat habitat)
+        {
+            animalcoat = coat;
+            animaltype = type;
+            animalName = name;
+            numFeet = feet;
+            habitat = animalHabitat;
+        }
 
  
 
